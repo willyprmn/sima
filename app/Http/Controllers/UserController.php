@@ -15,6 +15,8 @@ class UserController extends Controller
             'title' => 'Sistem Informasi Monitoring Aplikasi | BKKBN',
             'pic' => PicModel::all()->count(),
             'app' => AppModel::all()->count(),
+            'appOld' => AppModel::where('tahunPengadaan', '<=', date('Y') - 5)->count(),
+            'appNew' => AppModel::where('tahunPengadaan', date('Y'))->count(),
             'apps' => AppModel::with('pics')->get()
         ]);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\AppModel;
 use App\Models\PicModel;
 
@@ -15,12 +16,9 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        $pic = AppModel::with('pics')->get();
-        // dd($pic);
         return view('application/index', [
-            'title' => 'Application',
-            'apps' => $pic
-            // 'apps' = AppModel::with('pic')->get()
+            'title' => 'Aplikasi',
+            'apps' => AppModel::with('pics')->orderBy('id', 'asc')->get()
         ]);
     }
 
@@ -32,7 +30,7 @@ class ApplicationController extends Controller
     public function create()
     {
         return view('application/create', [
-            'title' => 'Application',
+            'title' => 'Tambah Aplikasi',
             'pics' => PicModel::all()
         ]);
     }
@@ -45,21 +43,39 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        // ddd($request);
+        // dd($request);
         $validatedData = $request->validate([
             'appName' => 'required|unique:apps|max:255',
-            'url' => 'required|max:255',
-            'framework' => 'required|max:255',
-            'tahunPengadaan' => 'required',
-            'status' => 'required',
-            'class' => 'required',
-            'grade' => 'required',
+            'url' => 'required|unique:apps|max:255',
+            'tahunPengadaan' => 'required|numeric',
             'pic_id' => 'required'
+        ], [
+            'appName.required' => 'Nama aplikasi wajib di isi',
+            'appName.unique' => 'Nama aplikasi sudah tersedia',
+            'appName.max' => 'Nama aplikasi terlalu panjang',
+            'url.required' => 'Url aplikasi wajib di isi',
+            'url.unique' => 'Url aplikasi sudah tersedia',
+            'url.max' => 'Url aplikasi terlalu panjang',
+            'tahunPengadaan.required' => 'Tahun pengadaan wajib di isi',
+            'tahunPengadaan.numeric' => 'Tahun pengadaan wajib dalam bentuk angka',
+            'pic_id.required' => 'PIC wajib di pilih'
         ]);
 
-        AppModel::create($validatedData);
+        $data = [
+            'appName' => $validatedData['appName'],
+            'url' => $validatedData['url'],
+            'pic_id' => $validatedData['pic_id'],
+            'framework' => $request['framework'],
+            'tahunPengadaan' => $validatedData['tahunPengadaan'],
+            'status' => $request['status'],
+            'class' => $request['class'],
+            'grade' => $request['grade'],
+            'keterangan' => $request['keterangan']
+        ];
 
-        return redirect('/app')->with('success', 'New Application has been added!');
+        AppModel::create($data);
+
+        return redirect('/app')->with('success', 'Data aplikasi berhasil ditambahkan!');
     }
 
     /**
@@ -82,7 +98,7 @@ class ApplicationController extends Controller
     public function edit($id)
     {
         return view('application/edit', [
-            'title' => 'Application',
+            'title' => 'Ubah Aplikasi',
             'apps' => AppModel::where('id', $id)->get(),
             'pics' => PicModel::all()
         ]);
@@ -97,21 +113,38 @@ class ApplicationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = [
-            'appName' => 'required|unique:apps|max:255',
-            'url' => 'required|max:255',
-            'framework' => 'required|max:255',
-            'tahunPengadaan' => 'required',
-            'status' => 'required',
-            'class' => 'required',
-            'grade' => 'required',
+        $validatedData = $request->validate([
+            'appName' => ['required', Rule::unique('apps')->ignore($id), 'max:255'],
+            'url' => ['required', Rule::unique('apps')->ignore($id), 'max:255'],
+            'tahunPengadaan' => 'required|numeric',
             'pic_id' => 'required'
+        ], [
+            'appName.required' => 'Nama aplikasi wajib di isi',
+            'appName.unique' => 'Nama aplikasi sudah tersedia',
+            'appName.max' => 'Nama aplikasi terlalu panjang',
+            'url.required' => 'Url aplikasi wajib di isi',
+            'url.unique' => 'Url aplikasi sudah tersedia',
+            'url.max' => 'Url aplikasi terlalu panjang',
+            'tahunPengadaan.required' => 'Tahun pengadaan wajib di isi',
+            'tahunPengadaan.numeric' => 'Tahun pengadaan wajib dalam bentuk angka',
+            'pic_id.required' => 'PIC wajib di pilih'
+        ]);
+
+        $data = [
+            'appName' => $validatedData['appName'],
+            'url' => $validatedData['url'],
+            'pic_id' => $validatedData['pic_id'],
+            'framework' => $request['framework'],
+            'tahunPengadaan' => $validatedData['tahunPengadaan'],
+            'status' => $request['status'],
+            'class' => $request['class'],
+            'grade' => $request['grade'],
+            'keterangan' => $request['keterangan']
         ];
-        $validatedData = $request->validate($rules);
 
-        AppModel::where('id', $id)->update($validatedData);
+        AppModel::where('id', $id)->update($data);
 
-        return redirect('/app')->with('success', 'Application has been updated!');
+        return redirect('/app')->with('success', 'Data aplikasi berhasil diubah!');
     }
 
     /**
@@ -124,6 +157,6 @@ class ApplicationController extends Controller
     {
         AppModel::destroy($id);
 
-        return redirect('/app')->with('success', 'Application has been deleted!');
+        return redirect('/app')->with('success', 'Data aplikasi berhasil dihapus!');
     }
 }

@@ -11,7 +11,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item {{ Request::is('admin*') ? 'active' : '' }}">
-        <a class="nav-link" href="/adm_dashboard">
+        <a class="nav-link" href="/admin">
             <i class="fas fa-fw fa-home"></i>
             <span>Dashboard</span></a>
     </li>
@@ -23,14 +23,14 @@
     <li class="nav-item {{ Request::is('app*') ? 'active' : '' }}">
         <a class="nav-link" href="/app">
             <i class="fas fa-fw fa-clipboard-list"></i>
-            <span>APP List</span></a>
+            <span>Aplikasi</span></a>
     </li>
 
     <!-- Nav Item - PIC List -->
     <li class="nav-item {{ Request::is('pic*') ? 'active' : '' }}">
         <a class="nav-link" href="/pic">
             <i class="fas fa-fw fa-user"></i>
-            <span>PIC List</span></a>
+            <span>PIC</span></a>
     </li>
 
     <!-- Divider -->

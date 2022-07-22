@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\PicModel;
 
 class PicController extends Controller
@@ -15,8 +16,8 @@ class PicController extends Controller
     public function index()
     {
         return view('pic/index', [
-            'title' => 'Pic',
-            'pics' => PicModel::all()
+            'title' => 'PIC',
+            'pics' => PicModel::all()->sortBy('id')
         ]);
     }
 
@@ -28,7 +29,7 @@ class PicController extends Controller
     public function create()
     {
         return view('pic/create', [
-            'title' => 'Create PIC',
+            'title' => 'Tambah PIC',
         ]);
     }
 
@@ -44,13 +45,23 @@ class PicController extends Controller
         $validatedData = $request->validate([
             'picName' => 'required|unique:pics|max:255',
             'akronim' => 'required|unique:pics|max:255'
+        ], [
+            'picName.required' => 'Nama PIC wajib di isi',
+            'picName.unique' => 'Nama PIC sudah ada',
+            'picName.max' => 'Nama PIC berkarakter terlalu panjang',
+            'akronim.required' => 'Akronim wajib di isi',
+            'akronim.unique' => 'Akronim sudah ada',
+            'akronim.max' => 'Akronim berkarakter terlalu panjang'
         ]);
 
-        // ddd($validatedData);
+        $data = [
+            'picName' => ucwords($validatedData['picName']),
+            'akronim' => strtoupper($validatedData['akronim'])
+        ];
 
-        PicModel::create($validatedData);
+        PicModel::create($data);
 
-        return redirect('/pic')->with('success', 'New PIC has been added!');
+        return redirect('/pic')->with('success', 'PIC berhasil ditambahkan!');
     }
 
     /**
@@ -73,7 +84,7 @@ class PicController extends Controller
     public function edit($id)
     {
         return view('pic/edit', [
-            'title' => 'Pic',
+            'title' => 'Ubah PIC',
             'pics' => PicModel::where('id', $id)->get()
         ]);
     }
@@ -87,15 +98,26 @@ class PicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = [
-            'picName' => 'required|unique:pics|max:255',
-            'akronim' => 'required|unique:pics|max:255'
+        $validatedData = $request->validate([
+            'picName' => ['required', Rule::unique('pics')->ignore($id), 'max:255'],
+            'akronim' => ['required', Rule::unique('pics')->ignore($id), 'max:255']
+        ], [
+            'picName.required' => 'Nama PIC wajib di isi',
+            'picName.unique' => 'Nama PIC sudah ada',
+            'picName.max' => 'Nama PIC berkarakter terlalu panjang',
+            'akronim.required' => 'Akronim wajib di isi',
+            'akronim.unique' => 'Akronim sudah ada',
+            'akronim.max' => 'Akronim berkarakter terlalu panjang'
+        ]);
+
+        $data = [
+            'picName' => ucwords($validatedData['picName']),
+            'akronim' => strtoupper($validatedData['akronim'])
         ];
-        $validatedData = $request->validate($rules);
 
-        PicModel::where('id', $id)->update($validatedData);
+        PicModel::where('id', $id)->update($data);
 
-        return redirect('/pic')->with('success', 'PIC has been updated!');
+        return redirect('/pic')->with('success', 'PIC berhasil diubah!');
     }
 
     /**
@@ -108,6 +130,6 @@ class PicController extends Controller
     {
         PicModel::destroy($id);
 
-        return redirect('/pic')->with('success', 'PIC has been deleted!');
+        return redirect('/pic')->with('success', 'PIC berhasil dihapus!');
     }
 }

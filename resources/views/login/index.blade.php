@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{{ $title }} | SIMA</title>
+    <title>{{ $title }} | Sistem Informasi Monitoring Aplikasi</title>
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/images/bkkbn-icon.png') }}">
 
     <!-- Custom fonts for this template-->
@@ -38,15 +38,33 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Silahkan Login</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">SIMA</h1>
                                     </div>
+                                    @if(session()->has('loginError'))
+                                    <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <strong>Gagal - </strong> {{ session('loginError') }}
+                                    </div>
+                                    @endif
                                     <form class="user" action="/login" method="POST">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="username" class="form-control form-control-user" id="username" name="username" placeholder="Username" autofocus>
+                                            <input type="username" class="form-control form-control-user @error('username') is-invalid @enderror" id="username" name="username" placeholder="Username" autofocus required>
+                                            @error('username')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
+                                            <input type="password" class="form-control form-control-user @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password" required>
+                                            @error('password')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
                                         </div>
                                         <!-- <div class="form-group">
                                             <div class="custom-control custom-checkbox small">

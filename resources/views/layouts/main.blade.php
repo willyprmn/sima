@@ -24,6 +24,12 @@
     <!-- Custom styles for this page -->
     <link href="{{ asset('sb_admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
+    <style>
+        .required{
+            color: #ff0000;
+        }
+    </style>
+
 </head>
 
 <body id="page-top">
@@ -115,6 +121,13 @@
     <script src="{{ asset('sb_admin/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('sb_admin/js/demo/chart-pie-demo.js') }}"></script>
     <script src="{{ asset('sb_admin/js/demo/datatables-demo.js') }}"></script>
+
+    <!-- Custom JS -->
+    @if(Request::is('pic*'))
+    <script src="{{ asset('js/pic.js') }}"></script>
+    @elseif(Request::is('app*'))
+    <script src="{{ asset('js/app.js') }}"></script>
+    @endif
 
 </body>
 

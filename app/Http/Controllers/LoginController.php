@@ -21,6 +21,9 @@ class LoginController extends Controller
             // 'email' => ['required', 'email:dns'],
             'username' => ['required'],
             'password' => ['required']
+        ], [
+            'username.required' => 'Username wajib di isi',
+            'password.required' => 'Password wajib di isi'
         ]);
 
         if (Auth::attempt($credentials)) {
@@ -29,7 +32,7 @@ class LoginController extends Controller
             return redirect()->intended('');
         }
 
-        return back()->with('loginError', 'Login Failed !!!');
+        return back()->with('loginError', 'Username/Password salah!');
     }
 
     public function logout(Request $request)

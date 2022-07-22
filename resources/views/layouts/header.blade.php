@@ -5,7 +5,7 @@
         <i class="fa fa-bars"></i>
     </button>
 
-    <div class="sidebar-brand-text d-none d-lg-inline mx-3">Sistem Informasi Monitoring Aplikasi</div>
+    <div class="sidebar-brand-text d-none d-lg-inline mx-3">Sistem Informasi Monitoring Aplikasi | BKKBN</div>
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">

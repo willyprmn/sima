@@ -9,10 +9,18 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
-            <a href="/pic/create" class="btn btn-primary">Tambah</a>
+            <a href="/pic/create" class="btn btn-primary"><i class="fas fa-plus me-1"></i> Tambah</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
+                @if(session()->has('success'))
+                <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Sukses - </strong> {{ session('success') }}
+                </div>
+                @endif
                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>

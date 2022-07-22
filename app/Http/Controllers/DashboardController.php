@@ -14,7 +14,9 @@ class DashboardController extends Controller
         return view('dashboard/index', [
             'title' => 'Dashboard',
             'pic' => PicModel::all()->count(),
-            'app' => AppModel::all()->count()
+            'app' => AppModel::all()->count(),
+            'appOld' => AppModel::where('tahunPengadaan', '<=', date('Y') - 5)->count(),
+            'appNew' => AppModel::where('tahunPengadaan', date('Y'))->count()
         ]);
     }
 }

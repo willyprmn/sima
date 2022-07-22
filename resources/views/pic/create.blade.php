@@ -11,10 +11,12 @@
             <h6 class="m-0 font-weight-bold text-primary">Form PIC</h6>
         </div>
         <div class="card-body">
+            <h6 class="required">* ) required</h6>
+            <br>
             <form method="POST" action="/pic" class="mb-5">
                 @csrf
                 <div class="mb-3">
-                    <label for="picName" class="form-label">Pic Name</label>
+                    <label for="picName" class="form-label">Nama PIC <b class="required">*</b></label>
                     <input type="text" class="form-control @error('picName') is-invalid @enderror" id="picName" name="picName" value="{{ old('picName') }}" autofocus required>
                     @error('picName')
                     <div class="invalid-feedback">
@@ -23,7 +25,7 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="akronim" class="form-label">Akronim</label>
+                    <label for="akronim" class="form-label">Akronim <b class="required">*</b></label>
                     <input type="text" class="form-control @error('akronim') is-invalid @enderror" id="akronim" name="akronim" value="{{ old('akronim') }}" required>
                     @error('akronim')
                     <div class="invalid-feedback">
@@ -32,8 +34,8 @@
                     @enderror
                 </div>
                 <div>
-                    <a href="/pic" class="btn btn-warning">Kembali</a>
-                    <button type="submit" class="btn btn-success">Simpan</button>
+                    <a href="/pic" class="btn btn-warning"><i class="fa fa-undo"></i> Kembali</a>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
                 </div>
             </form>
         </div>

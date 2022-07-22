@@ -18,11 +18,12 @@ class CreateAppsTable extends Migration
             $table->foreignId('pic_id')->index()->constrained('pics');
             $table->string('appName')->unique();
             $table->string('url')->unique();
-            $table->string('framework');
+            $table->string('framework')->nullable();
             $table->tinyInteger('tahunPengadaan');
-            $table->string('status', 15);
-            $table->string('class', 15);
-            $table->string('grade', 1);
+            $table->string('status', 13)->nullable();
+            $table->string('class', 16)->nullable();
+            $table->string('grade', 1)->nullable();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }
