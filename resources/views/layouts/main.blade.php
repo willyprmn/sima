@@ -91,10 +91,10 @@
                 </div>
                 <!-- <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div> -->
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                    <button class="btn btn-outline-secondary" type="button" data-dismiss="modal"><i class="fa fa-undo me-1"></i> Batal</button>
                     <form action="/logout" method="POST">
                         @csrf
-                        <button class="btn btn-warning">Logout</button>
+                        <button class="btn btn-outline-warning"><i class="far fa-window-close me-1"></i> Logout</button>
                     </form>
                     <!-- <a class="btn btn-warning" href="/logout">Logout</a> -->
                 </div>
