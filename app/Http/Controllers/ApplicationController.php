@@ -48,7 +48,8 @@ class ApplicationController extends Controller
             'appName' => 'required|unique:apps|max:255',
             'url' => 'required|unique:apps|max:255',
             'tahunPengadaan' => 'required|numeric',
-            'pic_id' => 'required'
+            'pic_id' => 'required',
+            'keterangan' => 'required'
         ], [
             'appName.required' => 'Nama aplikasi wajib di isi',
             'appName.unique' => 'Nama aplikasi sudah tersedia',
@@ -58,7 +59,8 @@ class ApplicationController extends Controller
             'url.max' => 'Url aplikasi terlalu panjang',
             'tahunPengadaan.required' => 'Tahun pengadaan wajib di isi',
             'tahunPengadaan.numeric' => 'Tahun pengadaan wajib dalam bentuk angka',
-            'pic_id.required' => 'PIC wajib di pilih'
+            'pic_id.required' => 'PIC wajib di pilih',
+            'keterangan.required' => 'Keterangan wajib di isi'
         ]);
 
         $data = [
@@ -70,7 +72,7 @@ class ApplicationController extends Controller
             'status' => $request['status'],
             'class' => $request['class'],
             'grade' => $request['grade'],
-            'keterangan' => $request['keterangan']
+            'keterangan' => $validatedData['keterangan']
         ];
 
         AppModel::create($data);
@@ -117,7 +119,8 @@ class ApplicationController extends Controller
             'appName' => ['required', Rule::unique('apps')->ignore($id), 'max:255'],
             'url' => ['required', Rule::unique('apps')->ignore($id), 'max:255'],
             'tahunPengadaan' => 'required|numeric',
-            'pic_id' => 'required'
+            'pic_id' => 'required',
+            'keterangan' => 'required'
         ], [
             'appName.required' => 'Nama aplikasi wajib di isi',
             'appName.unique' => 'Nama aplikasi sudah tersedia',
@@ -127,7 +130,8 @@ class ApplicationController extends Controller
             'url.max' => 'Url aplikasi terlalu panjang',
             'tahunPengadaan.required' => 'Tahun pengadaan wajib di isi',
             'tahunPengadaan.numeric' => 'Tahun pengadaan wajib dalam bentuk angka',
-            'pic_id.required' => 'PIC wajib di pilih'
+            'pic_id.required' => 'PIC wajib di pilih',
+            'keterangan.required' => 'Keterangan wajib di isi'
         ]);
 
         $data = [
@@ -139,7 +143,7 @@ class ApplicationController extends Controller
             'status' => $request['status'],
             'class' => $request['class'],
             'grade' => $request['grade'],
-            'keterangan' => $request['keterangan']
+            'keterangan' => $validatedData['keterangan']
         ];
 
         AppModel::where('id', $id)->update($data);

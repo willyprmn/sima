@@ -3,7 +3,7 @@
 @section('container')
 <div class="container-fluid">
 
-    <h1 class="h3 mb-4 text-gray-800">Edit Data PIC</h1>
+    <h1 class="h3 mb-4 text-gray-800 text-center">Edit Data PIC</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -35,8 +35,8 @@
                     @enderror
                 </div>
                 <div>
-                    <a href="/pic" class="btn btn-warning">Kembali</a>
-                    <button type="submit" class="btn btn-success">Simpan</button>
+                    <a href="/pic" class="btn btn-outline-warning">Kembali</a>
+                    <button type="submit" class="btn btn-outline-success">Simpan</button>
                 </div>
             </form>
         </div>

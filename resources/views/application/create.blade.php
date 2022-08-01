@@ -3,7 +3,7 @@
 @section('container')
 <div class="container-fluid">
 
-    <h1 class="h3 mb-4 text-gray-800">Tambah Data Aplikasi</h1>
+    <h1 class="h3 mb-4 text-gray-800 text-center">Tambah Data Aplikasi</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -95,12 +95,17 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="keterangan" class="form-label">Keterangan</label>
-                    <input type="text" class="form-control" id="keterangan" name="keterangan" value="{{ old('keterangan') }}">
+                    <label for="keterangan" class="form-label">Keterangan <b class="required">*</b></label>
+                    <input type="text" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" name="keterangan" value="{{ old('keterangan') }}" required>
+                    @error('keterangan')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
                 </div>
                 <div>
-                    <a href="/app" class="btn btn-warning"><i class="fa fa-undo"></i> Kembali</a>
-                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
+                    <a href="/app" class="btn btn-outline-warning"><i class="fa fa-undo"></i> Kembali</a>
+                    <button type="submit" class="btn btn-outline-success"><i class="fa fa-save"></i> Simpan</button>
                 </div>
             </form>
         </div>

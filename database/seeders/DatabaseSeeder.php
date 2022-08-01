@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Dittekda',
             'username' => 'dittekda',
             'email' => 'willy.permana@bkkbn.go.id',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('passwd'),
         ]);
     }
 }

@@ -66,15 +66,8 @@
                                             </div>
                                             @enderror
                                         </div>
-                                        <!-- <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
-                                        </div> -->
                                         <hr>
-                                        <button class="btn btn-primary btn-user btn-block" type="submit">Login</button>
+                                        <button class="btn btn-outline-primary btn-user btn-block" type="submit"><b>Login</b></button>
                                     </form>
                                     <div class="text-center mt-4">
                                         <a href="/" class="text-decoration-none text-blue-100">Kembali ke Dashboard</a>
@@ -100,6 +93,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('sb_admin/js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('js/login.js') }}"></script>
 
 </body>
 

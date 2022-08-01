@@ -25,7 +25,7 @@
     <link href="{{ asset('sb_admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
     <style>
-        .required{
+        .required {
             color: #ff0000;
         }
     </style>
@@ -113,17 +113,18 @@
     <script src="{{ asset('sb_admin/js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
-    <script src="{{ asset('sb_admin/vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('sb_admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('sb_admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{ asset('sb_admin/js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('sb_admin/js/demo/chart-pie-demo.js') }}"></script>
     <script src="{{ asset('sb_admin/js/demo/datatables-demo.js') }}"></script>
 
+    <!-- Page level custom scripts -->
+    @if(Request::is('admin*'))
+    <script src="{{ asset('sb_admin/vendor/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ asset('sb_admin/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('sb_admin/js/demo/chart-pie-demo.js') }}"></script>
+
     <!-- Custom JS -->
-    @if(Request::is('pic*'))
+    @elseif(Request::is('pic*'))
     <script src="{{ asset('js/pic.js') }}"></script>
     @elseif(Request::is('app*'))
     <script src="{{ asset('js/app.js') }}"></script>

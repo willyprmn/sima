@@ -16,7 +16,7 @@ class UserController extends Controller
             'pic' => PicModel::all()->count(),
             'app' => AppModel::all()->count(),
             'appOld' => AppModel::where('tahunPengadaan', '<=', date('Y') - 5)->count(),
-            'appNew' => AppModel::where('tahunPengadaan', date('Y'))->count(),
+            'appOff' => AppModel::where('keterangan', 'Tidak aktif')->count(),
             'apps' => AppModel::with('pics')->get()
         ]);
     }

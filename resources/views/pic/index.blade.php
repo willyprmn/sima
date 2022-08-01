@@ -3,13 +3,13 @@
 @section('container')
 <div class="container-fluid">
 
-    <h1 class="h3 mb-4 text-gray-800">PIC List</h1>
+    <h1 class="h3 mb-4 text-gray-800 text-center">Daftar PIC</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
-            <a href="/pic/create" class="btn btn-primary"><i class="fas fa-plus me-1"></i> Tambah</a>
+            <a href="/pic/create" class="btn btn-outline-primary"><i class="fas fa-plus me-1"></i> Tambah</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">

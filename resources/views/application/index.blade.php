@@ -3,13 +3,13 @@
 @section('container')
 <div class="container-fluid">
 
-    <h1 class="h3 mb-4 text-gray-800">Application List</h1>
+    <h1 class="h3 mb-4 text-gray-800 text-center">Daftar Aplikasi</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <!-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> -->
-            <a href="/app/create" class="btn btn-primary"><i class="fas fa-plus me-1"></i> Tambah</a>
+            <a href="/app/create" class="btn btn-outline-primary"><i class="fas fa-plus me-1"></i> Tambah</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -28,6 +28,7 @@
                             <th>Aplikasi</th>
                             <th>Alamat URL</th>
                             <th>PIC</th>
+                            <th>Keterangan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -36,8 +37,9 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $a->appName }}</td>
-                            <td>{{ $a->url }}</td>
+                            <td><a href="{{ $a->url }}" target="blank" class="text-decoration-none">{{ $a->url }}</a></td>
                             <td>{{ $a->pics->akronim }}</td>
+                            <td>{{ $a->keterangan }}</td>
                             <td>
                                 <!-- <a href="/app/{{ $a->id }}/edit" class="badge bg-warning"><span data-feather="edit"></span></a> -->
                                 <form action="/app/{{ $a->id }}/edit" method="GET" class="d-inline">
